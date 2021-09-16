@@ -1,13 +1,15 @@
 package co.com.sofka.crud.services;
 
 import co.com.sofka.crud.DTOs.TodoDTO;
-import co.com.sofka.crud.entities.Todo;
+
+import java.util.ArrayList;
 
 public interface TodoServicesInterface {
 
-    public Iterable<Todo> list();
-    public Todo get(long id);
-    public Todo save(TodoDTO todoDTO);
+    public Iterable<TodoDTO> list();
+    public TodoDTO get(long id);
+    public TodoDTO save(TodoDTO todoDTO);
     public void delete(long id);
-    public Todo update(TodoDTO todoDTO);
+    public TodoDTO update(TodoDTO todoDTO);
+
 }

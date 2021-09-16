@@ -17,12 +17,12 @@ public class ListTodoController {
     private ListTodoService service;
 
     @GetMapping(value = "api/listsOfTodo")
-    public Iterable<ListTodo> listOfTodo(){
+    public Iterable<TodoListDTO> listOfTodo(){
         return service.listAllTodo();
     }
 
     @PostMapping(value = "api/saveListTodo")
-    public ListTodo saveListTodo(@RequestBody TodoListDTO todoListDTO){
+    public TodoListDTO saveListTodo(@RequestBody TodoListDTO todoListDTO){
         return service.saveListTodo(todoListDTO);
     }
 
@@ -32,7 +32,7 @@ public class ListTodoController {
     }
 
     @GetMapping(value = "api/{id}/getTodoList")
-    public ListTodo getTodoList(@PathVariable("id") Long id){
+    public TodoListDTO getTodoList(@PathVariable("id") Long id){
         return service.getListTodo(id);
     }
 }

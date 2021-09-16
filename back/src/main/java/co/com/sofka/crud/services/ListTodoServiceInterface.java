@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public interface ListTodoServiceInterface {
 
-    public Iterable<ListTodo> listAllTodo();
-    public ListTodo getListTodo(long id);
-    public ListTodo saveListTodo(TodoListDTO listTodo);
+    public Iterable<TodoListDTO> listAllTodo();
+    public TodoListDTO getListTodo(long id);
+    public TodoListDTO saveListTodo(TodoListDTO todoListDTO);
     public void deleteListTodo(long id);
 }

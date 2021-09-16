@@ -11,15 +11,15 @@ public class Todo {
     private Long id;
     private String name;
     private boolean completed;
-    private long groupListId;
+    private long todoListId;
 
 
-    public long getGroupListId() {
-        return groupListId;
+    public long getTodoListId() {
+        return todoListId;
     }
 
-    public void setGroupListId(Long groupListId) {
-        this.groupListId = groupListId;
+    public void setTodoListId(Long todoListId) {
+        this.todoListId = todoListId;
     }
 
     public Long getId() {
