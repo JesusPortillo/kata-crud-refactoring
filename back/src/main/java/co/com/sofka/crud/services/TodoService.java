@@ -1,30 +1,46 @@
 package co.com.sofka.crud.services;
 
+import co.com.sofka.crud.DTOs.TodoDTO;
 import co.com.sofka.crud.entities.Todo;
 import co.com.sofka.crud.repositories.TodoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
-public class TodoService {
+public class TodoService implements TodoServicesInterface{
 
-    @Autowired
+
     private TodoRepository repository;
 
-    public ArrayList<Todo> list(){return (ArrayList<Todo>) repository.findAll();}
+    @Override
+    public Iterable<Todo> list(){return repository.findAll();}
 
-    public Todo save(Todo todo){
+    @Override
+    public Todo get(long id) {
+        return repository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public Todo save(TodoDTO todoDTO){
+        Todo todo = new Todo();
+        todo.setName(todoDTO.getName());
+        todo.setCompleted(todoDTO.isCompleted());
+        todo.setGroupListId(todo.getGroupListId());
         return repository.save(todo);
     }
 
-    public void delete(Long id){
+    @Override
+    public Todo update(TodoDTO todoDTO){
+        Todo todo = repository.findById(todoDTO.getId()).orElseThrow();
+        todo.setName(todoDTO.getName());
+        todo.setCompleted(todoDTO.isCompleted());
+        todo.setGroupListId(todoDTO.getTodoListId());
+        return repository.save(todo);
+    }
+
+    @Override
+    public void delete(long id) {
         repository.delete(get(id));
     }
 
-    public Todo get(Long id){
-        return repository.findById(id).orElseThrow();
-    }
 
 }
