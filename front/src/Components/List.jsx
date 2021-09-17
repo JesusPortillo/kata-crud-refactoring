@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Store from '../Store/Store';
 
 const HOST_API = "http://localhost:8080/api";
@@ -6,7 +6,7 @@ function List({todoListId}) {
   
   const { state: { todo }, dispatch } = useContext(Store);
   const currentList = todo.list.filter((item) => item.todoListId === todoListId );
-
+  const [isCheck, setisCheck] = useState(false)
   useEffect(() => {
     fetch(HOST_API + "/todos")
       .then(response => response.json())
@@ -28,6 +28,7 @@ function List({todoListId}) {
   };
 
   const onChange = (event, todo) => {
+    setisCheck(todo.completed)
     const request = {
       name: todo.name,
       id: todo.id,
@@ -46,13 +47,10 @@ function List({todoListId}) {
         dispatch({ type: "update-item", item: todo });
       });
   };
+  
 
-  const decorationDone = {
-    textDecoration: 'line-through'
-  };
-
-  return <div className="mt-3">
-    <table className="table table-striped ">
+  return <div className = "mt-3">
+    <table className = "styled-table">
         <thead>
           <tr>
             <th>Id</th>
@@ -63,21 +61,21 @@ function List({todoListId}) {
         </thead>
         <tbody>
           {currentList.map((todo, index) => {
-            return <tr key={todo.id} style={todo.completed ? decorationDone : {}}>
+            return <tr key={todo.id} >
               <td className="align-middle">{todo.id}</td>
-              <td className="align-middle">{todo.name}</td>
+              <td className={isCheck? "name-active":"name-deactive"}>{todo.name}</td>
               <td className="align-items-center">
-                <input type="checkbox" className="align-middle" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input>
+                <input type="checkbox" className="check" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input>
               </td>
               <td className="text-center">
-                <button type="button" onClick={() => onDelete(todo.id)} className="btn btn-danger btn-sm">Eliminar</button>
-                <button disabled={todo.completed} onClick={() => onEdit(todo)} type="button" className="btn btn-info btn-sm ml-1">Editar</button>
+                <button type="button" onClick={() => onDelete(todo.id)} className="delete-button">Eliminar</button>
+                <button disabled={todo.completed} onClick={() => onEdit(todo)} type="button" className="edit-button">Editar</button>
               </td>
             </tr>
           })}
         </tbody>
       </table>
-      <div className={currentList.length === 0 ? "": "d-none"}>No se han creado tareas aún.</div>
+      
   </div>
 }
 

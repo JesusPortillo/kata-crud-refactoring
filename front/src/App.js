@@ -5,7 +5,6 @@ import StoreProvider from './Providers/StoreProvider.js';
 
 function App() {
   return <StoreProvider >
-    <h3>To-Do List</h3>
     <ListForm />
     <ListList />
   </StoreProvider>
