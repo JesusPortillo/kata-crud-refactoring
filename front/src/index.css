@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-image: radial-gradient( circle farthest-corner at -4% -12.9%,  rgba(74,98,110,1) 0.3%, rgba(30,33,48,1) 90.2% );
 }
 
 code {
@@ -17,8 +23,9 @@ code {
   margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
-  min-width: 400px;
+  width: 1000px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  background: white;
 }
 
 .styled-table thead tr {
@@ -30,6 +37,7 @@ code {
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
+	
 }
 
 .check{
@@ -85,13 +93,121 @@ code {
 	top:1px;
 }
 
-.principal-container, .create-list-div{
-  margin-left: 400px;
-}
-
 .name-active{
   text-decoration: line-through;
 }
 .name-deactive{
-  text-decoration: line-through;
+  text-decoration: none;
+}
+
+input{
+	border: 1px solid #848484;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	outline:0;
+	height:25px;
+	width: 275px;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top: 30px;
+}
+
+form.form-todo{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	margin-left: 320px;
+	
+}
+
+form.form-todo button{
+	margin-top: 25px;
+	margin-left: 10px;
+}
+
+.update-todo-button{
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:12px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+}
+
+.update-todo-button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+.update-todo-button:active {
+	position:relative;
+	top:1px;
+}
+
+.create-todo-button {
+	box-shadow:inset 0px 1px 0px 0px #caefab;
+	background:linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
+	background-color:#77d42a;
+	border-radius:6px;
+	border:1px solid #268a16;
+	display:inline-block;
+	cursor:pointer;
+	color:white;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #aade7c;
+}
+.create-todo-button:hover {
+	background:linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
+	background-color:#5cb811;
+}
+.create-todo-button:active {
+	position:relative;
+	top:1px;
+}
+.create-list-div button{
+	margin-top: 15px;
+	box-shadow:inset 0px 1px 0px 0px #caefab;
+	background:linear-gradient(to bottom, #77d42a 5%, #5cb811 100%);
+	background-color:#77d42a;
+	border-radius:6px;
+	border:1px solid #268a16;
+	display:inline-block;
+	cursor:pointer;
+	color:white;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #aade7c;
+}
+
+.create-list-div button:hover{
+	background:linear-gradient(to bottom, #5cb811 5%, #77d42a 100%);
+	background-color:#5cb811;
+}
+
+.create-list-div button:active{
+	position:relative;
+	top:1px;
+}
+
+.principal-container{
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	background: white;
+}
+.tittle{
+	color: white;
 }

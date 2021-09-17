@@ -30,10 +30,10 @@ function ListList() {
     <div className = "principal-container">
         {currentList.map((todoList, index) => {
           return (
-            <div className="p-3 my-3 border"  key={todoList.id}>
-              <div className="d-flex justify-content-between mb-4">
+            <div key={todoList.id}>
+              <div>
                 <h4>{ todoList.name ? todoList.name.toUpperCase() : ""}</h4>
-                <button type="button" className="btn btn-outline-danger btn-sm" onClick={() => onDelete(todoList.id)}>Eliminar</button>
+                <button className="delete-button" type="button"onClick={() => onDelete(todoList.id)}>Eliminar</button>
               </div>
               <Form todoListId={todoList.id} />
               <List todoListId={todoList.id} />

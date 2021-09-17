@@ -6,18 +6,12 @@ const HOST_API = "http://localhost:8080/api";
 function Form({todoListId}) {
   
   const formRef = useRef(null);
-  const { state: { todo, errorTodo }, dispatch } = useContext(Store);
+  const { state: { todo}, dispatch } = useContext(Store);
   const item = todo.item;
-  const error = errorTodo;
   const [state, setState] = useState(item);
 
   const onAdd = (event) => {
     event.preventDefault();
-
-    if(state.name === undefined || state.name === ""){
-      dispatch({ type: "update-errorTodo", error: { isError:true, id: todoListId }});
-    } else{
-      dispatch({ type: "update-errorTodo", error: { isError:false, id: null }});
       const request = {
         name: state.name,
         id: null,
@@ -38,15 +32,11 @@ function Form({todoListId}) {
           setState({ name: "" });
           formRef.current.reset();
         });
-    }
+    
   }
 
   const onEdit = (event) => {
     event.preventDefault();
-    if(state.name === ""){
-      dispatch({ type: "update-errorTodo", error: { isError:true, id: todoListId }});
-    } else{
-      dispatch({ type: "update-errorTodo", error: { isError:false, id: null }});
       const request = {
         name: state.name,
         id: item.id,
@@ -67,16 +57,15 @@ function Form({todoListId}) {
           setState({ name: "" });
           formRef.current.reset();
         });
-    }
+    
   }
 
-  return <form className="form-inline" ref={formRef}>
-    <div className="form-group">
-      <input type="text" name="name" placeholder="¿Qué piensas hacer?" className={error && error.id === todoListId ? "is-invalid form-control form-control-sm": "form-control-sm"} defaultValue={ todoListId === item.todoListId ? item.name : null } onChange={(event) => {setState({ ...state, name: event.target.value })}}></input>
+  return <form className="form-todo" ref={formRef}>
+    <div>
+      <input type="text" name="name" placeholder="Escribe una tarea aquí"  defaultValue={ todoListId === item.todoListId ? item.name : null } onChange={(event) => {setState({ ...state, name: event.target.value })}}></input>
     </div>
-
-    <button type="button"  className={todoListId === item.todoListId ? "btn btn-secondary btn-sm ml-2"  : "d-none"} onClick={onEdit}>Actualizar</button>
-    <button type="button" className={todoListId !== item.todoListId ? "btn btn-success btn-sm ml-2" : "d-none"} onClick={onAdd}>Crear</button>
+    <button className="update-todo-button" type="button" onClick={onEdit}>Actualizar</button>
+    <button className="create-todo-button" type="button" onClick={onAdd}>Crear</button>
   </form>
 }
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Store from '../Store/Store';
 
 const HOST_API = "http://localhost:8080/api";
@@ -6,7 +6,7 @@ function List({todoListId}) {
   
   const { state: { todo }, dispatch } = useContext(Store);
   const currentList = todo.list.filter((item) => item.todoListId === todoListId );
-  const [isCheck, setisCheck] = useState(false)
+  
   useEffect(() => {
     fetch(HOST_API + "/todos")
       .then(response => response.json())
@@ -28,7 +28,6 @@ function List({todoListId}) {
   };
 
   const onChange = (event, todo) => {
-    setisCheck(todo.completed)
     const request = {
       name: todo.name,
       id: todo.id,
@@ -60,14 +59,15 @@ function List({todoListId}) {
           </tr>
         </thead>
         <tbody>
-          {currentList.map((todo, index) => {
+          {currentList.map((todo) => {
+            
             return <tr key={todo.id} >
-              <td className="align-middle">{todo.id}</td>
-              <td className={isCheck? "name-active":"name-deactive"}>{todo.name}</td>
-              <td className="align-items-center">
+              <td>{todo.id}</td>
+              <td className={todo.completed? "name-active":"name-deactive"}>{todo.name}</td>
+              <td>
                 <input type="checkbox" className="check" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input>
               </td>
-              <td className="text-center">
+              <td>
                 <button type="button" onClick={() => onDelete(todo.id)} className="delete-button">Eliminar</button>
                 <button disabled={todo.completed} onClick={() => onEdit(todo)} type="button" className="edit-button">Editar</button>
               </td>
@@ -75,7 +75,6 @@ function List({todoListId}) {
           })}
         </tbody>
       </table>
-      
   </div>
 }
 
