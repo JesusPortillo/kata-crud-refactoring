@@ -1,13 +1,13 @@
 import React from 'react';
-import Form from './Components/Form.jsx'
-import List from './Components/List.jsx';
+import ListForm from './Components/ListForm.jsx';
+import ListList from './Components/ListList.jsx';
 import StoreProvider from './Providers/StoreProvider.js';
 
 function App() {
   return <StoreProvider >
     <h3>To-Do List</h3>
-    <Form />
-    <List />
+    <ListForm />
+    <ListList />
   </StoreProvider>
 }
 

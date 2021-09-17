@@ -1,11 +1,11 @@
 import React, {useContext, useEffect} from 'react'
-import { Store } from '../Store/Store';
+import Store from '../Store/Store';
 
 const HOST_API = "http://localhost:8080/api";
-function List() {
+function List({todoListId}) {
   
-  const { dispatch, state: { todo } } = useContext(Store);
-  const currentList = todo.list;
+  const { state: { todo }, dispatch } = useContext(Store);
+  const currentList = todo.list.filter((item) => item.todoListId === todoListId );
 
   useEffect(() => {
     fetch(HOST_API + "/todos")
@@ -14,7 +14,6 @@ function List() {
         dispatch({ type: "update-list", list })
       })
   }, [dispatch]);
-
 
   const onDelete = (id) => {
     fetch(HOST_API + "/" + id + "/todo", {
@@ -32,7 +31,8 @@ function List() {
     const request = {
       name: todo.name,
       id: todo.id,
-      completed: event.target.checked
+      completed: event.target.checked,
+      todoListId: todoListId
     };
     fetch(HOST_API + "/todo", {
       method: "PUT",
@@ -50,30 +50,35 @@ function List() {
   const decorationDone = {
     textDecoration: 'line-through'
   };
-    return (
-        <div>
-        <table >
-          <thead>
-            <tr>
-              <td>ID</td>
-              <td>Tarea</td>
-              <td>¿Completado?</td>
+
+  return <div className="mt-3">
+    <table className="table table-striped ">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Tarea</th>
+            <th>¿Completado?</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentList.map((todo, index) => {
+            return <tr key={todo.id} style={todo.completed ? decorationDone : {}}>
+              <td className="align-middle">{todo.id}</td>
+              <td className="align-middle">{todo.name}</td>
+              <td className="align-items-center">
+                <input type="checkbox" className="align-middle" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input>
+              </td>
+              <td className="text-center">
+                <button type="button" onClick={() => onDelete(todo.id)} className="btn btn-danger btn-sm">Eliminar</button>
+                <button disabled={todo.completed} onClick={() => onEdit(todo)} type="button" className="btn btn-info btn-sm ml-1">Editar</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {currentList.map((todo) => {
-              return <tr key={todo.id} style={todo.completed ? decorationDone : {}}>
-                <td>{todo.id}</td>
-                <td>{todo.name}</td>
-                <td><input type="checkbox" defaultChecked={todo.completed} onChange={(event) => onChange(event, todo)}></input></td>
-                <td><button onClick={() => onDelete(todo.id)}>Eliminar</button></td>
-                <td><button onClick={() => onEdit(todo)}>Editar</button></td>
-              </tr>
-            })}
-          </tbody>
-        </table>
-      </div>
-    )
+          })}
+        </tbody>
+      </table>
+      <div className={currentList.length === 0 ? "": "d-none"}>No se han creado tareas aún.</div>
+  </div>
 }
 
 export default List
