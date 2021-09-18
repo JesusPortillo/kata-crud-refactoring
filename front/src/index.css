@@ -26,6 +26,7 @@ code {
   width: 1000px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   background: white;
+  border-radius: 20px;
 }
 
 .styled-table thead tr {
@@ -37,7 +38,7 @@ code {
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
-	
+	text-align: center;
 }
 
 .check{
@@ -207,7 +208,17 @@ form.form-todo button{
 .principal-container{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	background: white;
+	border-radius: 20px;
 }
+
 .tittle{
 	color: white;
+}
+
+.error-on-empty{
+	color: white;
+}
+
+.error-off-empty{
+	display: none;
 }
