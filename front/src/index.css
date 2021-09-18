@@ -216,7 +216,9 @@ form.form-todo button{
 }
 
 .error-on-empty{
-	color: white;
+	color: blue;
+	margin-top: 20px;
+	margin-left: 15px;
 }
 
 .error-off-empty{
